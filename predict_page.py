@@ -1,59 +1,50 @@
 import streamlit as st
-import pickle
 import numpy as np
+import pandas as np
 
+def lost_profit(ind, mar, rev, marg, gro):
+    growth_rate = gro_state[mar]
+    margin_ind_rate = sector_av_ebitda_margin_table[ind]
+    potencial_profit = rev * (margin_ind_rate / 100)
+    act_profit = (marg / 100) * rev
+    profit_delta_qdc = potencial_profit - act_profit
+    profit_delta_growth = (growth_rate - gro) * rev
+    profit_delta_total = profit_delta_qdc + profit_delta_qdc
+    return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
 
-def load_model():
-    with open('saved_steps.pkl', 'rb') as file:
-        data = pickle.load(file)
-    return data
+sector_av_ebitda_margin = [22.216970460607886, 23.146861043187315, 38.69977063208259, 41.085547708295664,
+                           29.385876126208842, 22.38041537508514, 32.313896822280405, 23.230850464225615,
+                           76.070948087517, 37.41939100247284, 44.15140491944504]
+industry_list = ('Consumer Discretionary', 'Consumer Staples', 'Energy', 'Financials',
+                'Health Care', 'Industrials', 'Information Technology', 'Materials',
+                'Real Estate', 'Telecommunication Services', 'Utilities')
+market_state_type = ("Много небольших участников на конкурентом рынке",
+                     "В моем секторе есть крупные игроки, в число которых я не вхожу",
+                     "В моем секторе есть крупные игроки, в том числе я", "Я монополист")
 
-data = load_model()
-
-regressor = data["model"]
-le_country = data["le_country"]
-le_education = data["le_education"]
+gro_state = {'Много небольших участников на конкурентом рынке': 0.3,
+            'В моем секторе есть крупные игроки, в число которых я не вхожу': 0.5,
+            'В моем секторе есть крупные игроки, в том числе я': 0.2,
+            'Я монополист': 0.05}
+sector_av_ebitda_margin_table = pd.Series(sector_av_ebitda_margin, index=industry_list)
 
 def show_predict_page():
-    st.title("Software Developer Salary Prediction")
+    st.title("Определеи свой потенциал")
 
-    st.write("""### We need some information to predict the salary""")
+    st.write("""### Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли""")
 
-    countries = (
-        "United States",
-        "India",
-        "United Kingdom",
-        "Germany",
-        "Canada",
-        "Brazil",
-        "France",
-        "Spain",
-        "Australia",
-        "Netherlands",
-        "Poland",
-        "Italy",
-        "Russian Federation",
-        "Sweden",
-    )
+    industry = st.selectbox("Ваша отрасль:", industry_list)
+    market_state = st.selectbox("Охарактеризуйте состояние сектора, в котором вы работаете:", list(gro_state.keys()))
+    revenue = st.number_input("Какова ваша выручка, млн, руб. в год:")
+    margin = st.number_input("Какова ваша маржа операционной прибыли, % к выручке:")
+    growth = st.slider("Каков ваш среднегодовой рост выручки в % за последние 3 года", -20, 100, 2)
 
-    education = (
-        "Less than a Bachelors",
-        "Bachelor’s degree",
-        "Master’s degree",
-        "Post grad",
-    )
-
-    country = st.selectbox("Country", countries)
-    education = st.selectbox("Education Level", education)
-
-    expericence = st.slider("Years of Experience", 0, 50, 3)
-
-    ok = st.button("Calculate Salary")
+    ok = st.button("Определить прибыль")
     if ok:
-        X = np.array([[country, education, expericence ]])
-        X[:, 0] = le_country.transform(X[:,0])
-        X[:, 1] = le_education.transform(X[:,1])
-        X = X.astype(float)
+        lost = lost_profit(industry, market_state, revenue, margin, growth)
 
         salary = regressor.predict(X)
-        st.subheader(f"The estimated salary is ${salary[0]:.2f}")
+        st.subheader(f"Предварительная оценка разницы в прибыли при сравнении с компаниями мирового класса: ₽{lost[0]:.2f} млн.")
+        st.subheader(f"в том числе:")
+        st.subheader(f"Прибыль упущенная в операционной деятельности: ₽{lost[1]:.2f} млн.")
+        st.subheader(f"Прибыль упущенная из-за отсутствия роста: ₽{lost[2]:.2f} млн.")

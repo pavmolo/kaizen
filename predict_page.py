@@ -5,12 +5,12 @@ import pandas as np
 sector_av_ebitda_margin = [22.216970460607886, 23.146861043187315, 38.69977063208259, 41.085547708295664,
                            29.385876126208842, 22.38041537508514, 32.313896822280405, 23.230850464225615,
                            76.070948087517, 37.41939100247284, 44.15140491944504]
-industry_list = ('Consumer Discretionary', 'Consumer Staples', 'Energy', 'Financials',
+industry_list = ['Consumer Discretionary', 'Consumer Staples', 'Energy', 'Financials',
                 'Health Care', 'Industrials', 'Information Technology', 'Materials',
-                'Real Estate', 'Telecommunication Services', 'Utilities')
-market_state_type = ("Много небольших участников на конкурентом рынке",
+                'Real Estate', 'Telecommunication Services', 'Utilities']
+market_state_type = ["Много небольших участников на конкурентом рынке",
                      "В моем секторе есть крупные игроки, в число которых я не вхожу",
-                     "В моем секторе есть крупные игроки, в том числе я", "Я монополист")
+                     "В моем секторе есть крупные игроки, в том числе я", "Я монополист"]
 
 gro_state = {'Много небольших участников на конкурентом рынке': 0.3,
             'В моем секторе есть крупные игроки, в число которых я не вхожу': 0.5,

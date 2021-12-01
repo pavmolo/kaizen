@@ -2,16 +2,6 @@ import streamlit as st
 import numpy as np
 import pandas as np
 
-def lost_profit(ind, mar, rev, marg, gro):
-    growth_rate = gro_state[mar]
-    margin_ind_rate = sector_av_ebitda_margin_table[ind]
-    potencial_profit = rev * (margin_ind_rate / 100)
-    act_profit = (marg / 100) * rev
-    profit_delta_qdc = potencial_profit - act_profit
-    profit_delta_growth = (growth_rate - gro) * rev
-    profit_delta_total = profit_delta_qdc + profit_delta_qdc
-    return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
-
 sector_av_ebitda_margin = [22.216970460607886, 23.146861043187315, 38.69977063208259, 41.085547708295664,
                            29.385876126208842, 22.38041537508514, 32.313896822280405, 23.230850464225615,
                            76.070948087517, 37.41939100247284, 44.15140491944504]
@@ -29,6 +19,15 @@ gro_state = {'Много небольших участников на конку
 gro_state_list = list(gro_state.keys())
 
 sector_av_ebitda_margin_table = pd.Series(sector_av_ebitda_margin, index=industry_list)
+def lost_profit(ind, mar, rev, marg, gro):
+    growth_rate = gro_state[mar]
+    margin_ind_rate = sector_av_ebitda_margin_table[ind]
+    potencial_profit = rev * (margin_ind_rate / 100)
+    act_profit = (marg / 100) * rev
+    profit_delta_qdc = potencial_profit - act_profit
+    profit_delta_growth = (growth_rate - gro) * rev
+    profit_delta_total = profit_delta_qdc + profit_delta_qdc
+    return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
 
 def show_predict_page():
     st.title("Определеи свой потенциал")

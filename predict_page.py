@@ -43,3 +43,4 @@ def show_predict_page():
         st.subheader(f"в том числе:")
         st.subheader(f"Прибыль упущенная в операционной деятельности: {lost[1]:.2f} млн.руб.")
         st.subheader(f"Прибыль упущенная из-за отсутствия роста: {lost[2]:.2f} млн.руб.")
+show_predict_page()

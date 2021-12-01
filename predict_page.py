@@ -26,6 +26,8 @@ gro_state = {'Много небольших участников на конку
             'В моем секторе есть крупные игроки, в число которых я не вхожу': 0.5,
             'В моем секторе есть крупные игроки, в том числе я': 0.2,
             'Я монополист': 0.05}
+gro_state_list = list(gro_state.keys())
+
 sector_av_ebitda_margin_table = pd.Series(sector_av_ebitda_margin, index=industry_list)
 
 def show_predict_page():
@@ -34,7 +36,7 @@ def show_predict_page():
     st.write("""### Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли""")
 
     industry = st.selectbox("Ваша отрасль:", industry_list)
-    market_state = st.selectbox("Охарактеризуйте состояние сектора, в котором вы работаете:", list(gro_state.keys()))
+    market_state = st.selectbox("Охарактеризуйте состояние сектора, в котором вы работаете:", gro_state_list)
     revenue = st.number_input("Какова ваша выручка, млн, руб. в год:")
     margin = st.number_input("Какова ваша маржа операционной прибыли, % к выручке:")
     growth = st.slider("Каков ваш среднегодовой рост выручки в % за последние 3 года", -20, 100, 2)

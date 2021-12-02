@@ -20,7 +20,7 @@ def lost_profit(ind, mar, rev, marg, gro):
     margin_ind_rate = sector_av_ebitda_margin_table[ind]
     potencial_profit = rev * (margin_ind_rate / 100)
     act_profit = (marg / 100) * rev
-    profit_delta_qdc = potencial_profit - act_profit
+    profit_delta_qdc = max(potencial_profit - act_profit, 0)
     profit_delta_growth = max((growth_rate - gro) * rev * (margin_ind_rate / 100), 0)
     profit_delta_total = max(profit_delta_qdc + profit_delta_growth, 0)
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]

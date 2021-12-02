@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-import pandas as np
+import pandas as pd
 
 sector_av_ebitda_margin_table = {'Consumer Discretionary': 22.216970460607886, 'Consumer Staples': 23.146861043187315, 'Energy': 38.69977063208259,
                                  'Financials': 41.085547708295664, 'Health Care': 29.385876126208842, 'Industrials': 22.38041537508514,
@@ -21,8 +21,8 @@ def lost_profit(ind, mar, rev, marg, gro):
     potencial_profit = rev * (margin_ind_rate / 100)
     act_profit = (marg / 100) * rev
     profit_delta_qdc = potencial_profit - act_profit
-    profit_delta_growth = (growth_rate - gro) * rev
-    profit_delta_total = profit_delta_qdc + profit_delta_qdc
+    profit_delta_growth = max((growth_rate - gro) * rev * (margin_ind_rate / 100), 0)
+    profit_delta_total = max(profit_delta_qdc + profit_delta_growth, 0)
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
 
 def show_predict_page():

@@ -36,8 +36,8 @@ def show_predict_page():
     industry = st.selectbox("Ваша отрасль:", industry_list)
     market_state = st.selectbox("Охарактеризуйте состояние сектора, в котором вы работаете:", gro_state_list)
     revenue = st.number_input("Какова ваша выручка, млн, руб. в год:", value=0)
-    margin = st.number_input("Какова ваша маржа операционной прибыли, % к выручке:")
-    growth = st.slider("Каков ваш среднегодовой рост выручки в % за последние 3 года", -20, 100, 2)
+    margin = st.number_input("Какова ваша маржа операционной прибыли, % к выручке:", value=0)
+    growth = st.slider("Каков ваш среднегодовой рост выручки в % за последние 3 года", -20, 100, 2, value=0)
 
     ok = st.button("Определить прибыль")
     if ok:

@@ -58,7 +58,7 @@ def show_predict_page():
         st.subheader(f"в том числе:")
         st.subheader(f"Прибыль упущенная в операционной деятельности: {lost[1]:.0f} млн.руб.")
         st.subheader(f"Прибыль упущенная из-за отсутствия роста: {lost[2]:.0f} млн.руб.")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=False, sharing="streamlit")
 
 # Вызываем приложение
 show_predict_page()

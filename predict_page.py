@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import plotly.graph_objects as go
 
 gsheetid = '1S7gJojFKedjSvSRM9npIDAzN_6mkSZhgEdGpNbxXnK0'
 list_1 = 'sector_margin'
@@ -19,7 +20,18 @@ df_growth_rate = pd.Series(df_growth_rate['growth_rate'])
 gro_state_list = df_growth_rate.index
 industry_list = df_sector_margin.index
 
+# Прорисовываем график
+fig = go.Figure(go.Waterfall(
+name = "20", orientation = "v",
+measure = ["total", "relative", "relative"],
+x = ["Общая дельта", "Операционная дельта", "Дельта роста"],
+textposition = "outside",
+text = [lost[0], -lost[1], -lost[2]],
+y = [lost[0], lost[1], lost[2]],
+connector = {"line":{"color":"rgb(63, 63, 63)"}},
+))
 
+# Функция прибыли
 def lost_profit(ind, mar, rev, marg, gro):
     growth_rate = df_growth_rate[mar]
     margin_ind_rate = df_sector_margin[ind]
@@ -30,6 +42,7 @@ def lost_profit(ind, mar, rev, marg, gro):
     profit_delta_total = profit_delta_qdc + profit_delta_growth
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
 
+# Функция приложения
 def show_predict_page():
     st.title("Определи свой потенциал")
     st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли', anchor=None)
@@ -47,4 +60,7 @@ def show_predict_page():
         st.subheader(f"в том числе:")
         st.subheader(f"Прибыль упущенная в операционной деятельности: {lost[1]:.0f} млн.руб.")
         st.subheader(f"Прибыль упущенная из-за отсутствия роста: {lost[2]:.0f} млн.руб.")
+        st.plotly_chart(fig, use_container_width=True)
+
+# Вызываем приложение
 show_predict_page()

@@ -35,14 +35,7 @@ def lost_profit(ind, mar, rev, marg, gro):
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
 
 # Прорисовываем график
-def grafik():
-    fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],
-                                 x=["Общая дельта", "Операционная дельта", "Дельта роста"],
-                                 textposition="outside",
-                                 text=lost, y=[lost[0], -lost[1], -lost[2]],
-                                 connector={"line": {"color": "rgb(63, 63, 63)"}}))
-    fig.update_layout(title = "Потери прибыли, млн. руб. в год", showlegend = True)
-    return fig
+
 # Функция приложения
 def show_predict_page():
     st.title("Определи свой потенциал")
@@ -62,6 +55,14 @@ def show_predict_page():
         st.subheader(f"в том числе:")
         st.subheader(f"Прибыль упущенная в операционной деятельности: {lost[1]:.0f} млн.руб.")
         st.subheader(f"Прибыль упущенная из-за отсутствия роста: {lost[2]:.0f} млн.руб.")
+        def grafik():
+            fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],
+                                         x=["Общая дельта", "Операционная дельта", "Дельта роста"],
+                                         textposition="outside",
+                                         text=lost, y=[lost[0], -lost[1], -lost[2]],
+                                         connector={"line": {"color": "rgb(63, 63, 63)"}}))
+            fig.update_layout(title = "Потери прибыли, млн. руб. в год", showlegend = True)
+            return fig
         graph = grafik()
         st.plotly_chart(graph, use_container_width=False, sharing="streamlit")
 

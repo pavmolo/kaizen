@@ -20,15 +20,6 @@ df_growth_rate = pd.Series(df_growth_rate['growth_rate'])
 gro_state_list = df_growth_rate.index
 industry_list = df_sector_margin.index
 
-# Прорисовываем график
-fig = go.Waterfall(
-name = "20", orientation = "v",
-measure = ["total", "relative", "relative"],
-x = ["Общая дельта", "Операционная дельта", "Дельта роста"],
-textposition = "outside",
-text = [lost[0], -lost[1], -lost[2]],
-y = lost,
-connector = {"line":{"color":"rgb(63, 63, 63)"}})
 
 # Функция прибыли
 def lost_profit(ind, mar, rev, marg, gro):
@@ -40,6 +31,11 @@ def lost_profit(ind, mar, rev, marg, gro):
     profit_delta_growth = max((growth_rate - (gro / 100)), 0.005 * rev)
     profit_delta_total = profit_delta_qdc + profit_delta_growth
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
+
+# Прорисовываем график
+fig = fig = go.Figure(go.Waterfall(name = "20", orientation = "v", measure = ["total", "relative", "relative"], 
+                                   x = ["Общая дельта", "Операционная дельта", "Дельта роста"], textposition = "outside", 
+                                   text = [lost[0], -lost[1], -lost[2]], y = lost, connector = {"line":{"color":"rgb(63, 63, 63)"}}))
 
 # Функция приложения
 def show_predict_page():

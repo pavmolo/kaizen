@@ -46,7 +46,7 @@ def grafik():
 # Функция приложения
 def show_predict_page():
     st.title("Определи свой потенциал")
-    st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли', anchor=None)
+    st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
 
     industry = st.selectbox("Ваша отрасль:", industry_list)
     market_state = st.selectbox("Охарактеризуйте состояние сектора, в котором вы работаете:", gro_state_list)

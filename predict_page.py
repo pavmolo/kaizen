@@ -49,10 +49,10 @@ def show_predict_page():
     ok = st.button("Определить прибыль")
     if ok:
         lost = lost_profit(industry, market_state, revenue, margin, growth)
-        fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["total", "relative", "relative"],
+        fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],
                                            x=["Общая дельта", "Операционная дельта", "Дельта роста"],
                                            textposition="outside",
-                                           text=[lost[0], -lost[1], -lost[2]], y=lost,
+                                           text=lost, y=[lost[0], -lost[1], -lost[2]],
                                            connector={"line": {"color": "rgb(63, 63, 63)"}}))
         st.subheader(f"Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: {lost[0]:.0f} млн. руб.")
         st.subheader(f"в том числе:")

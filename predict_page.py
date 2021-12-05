@@ -13,14 +13,16 @@ df_sector_margin = pd.read_csv(df_sector_margin_csv)
 df_growth_rate = pd.read_csv(df_growth_rate_csv)
 df_growth_rate.set_index('growth_state', inplace=True)
 df_sector_margin.set_index('sector', inplace=True)
+df_sector_margin = pd.Series(df_sector_margin['margin'])
+df_growth_rate = pd.Series(df_growth_rate['growth_rate'])
 
 gro_state_list = df_growth_rate.index
 industry_list = df_sector_margin.index
 
 
 def lost_profit(ind, mar, rev, marg, gro):
-    growth_rate = gro_state[mar]
-    margin_ind_rate = sector_av_ebitda_margin_table[ind]
+    growth_rate = df_growth_rate[mar]
+    margin_ind_rate = df_sector_margin[ind]
     potencial_profit = rev * (margin_ind_rate / 100)
     act_profit = (marg / 100) * rev
     profit_delta_qdc = max(potencial_profit - act_profit, 0.05 * act_profit, 0.02 * rev)

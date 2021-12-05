@@ -30,7 +30,7 @@ def lost_profit(ind, mar, rev, marg, gro):
 
 def show_predict_page():
     st.title("Определи свой потенциал")
-    st.header('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли', anchor=None)
+    st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли', anchor=None)
 
     industry = st.selectbox("Ваша отрасль:", industry_list)
     market_state = st.selectbox("Охарактеризуйте состояние сектора, в котором вы работаете:", gro_state_list)

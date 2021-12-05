@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import plotly.figure_factory as ff
+import plotly.graph_objects as go
 
 gsheetid = '1S7gJojFKedjSvSRM9npIDAzN_6mkSZhgEdGpNbxXnK0'
 list_1 = 'sector_margin'
@@ -33,8 +33,14 @@ def lost_profit(ind, mar, rev, marg, gro):
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
 
 # Прорисовываем график
-
-
+def grafik():
+    fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],
+                                 x=["Общая дельта", "Операционная дельта", "Дельта роста"],
+                                 textposition="outside",
+                                 text=lost, y=[lost[0], -lost[1], -lost[2]],
+                                 connector={"line": {"color": "rgb(63, 63, 63)"}}))
+    fig.update_layout(title = "Потери прибыли, млн. руб. в год", showlegend = True)
+    return fig
 # Функция приложения
 def show_predict_page():
     st.title("Определи свой потенциал")
@@ -49,16 +55,13 @@ def show_predict_page():
     ok = st.button("Определить прибыль")
     if ok:
         lost = lost_profit(industry, market_state, revenue, margin, growth)
-        fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],
-                                           x=["Общая дельта", "Операционная дельта", "Дельта роста"],
-                                           textposition="outside",
-                                           text=lost, y=[lost[0], -lost[1], -lost[2]],
-                                           connector={"line": {"color": "rgb(63, 63, 63)"}}))
+        
         st.subheader(f"Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: {lost[0]:.0f} млн. руб.")
         st.subheader(f"в том числе:")
         st.subheader(f"Прибыль упущенная в операционной деятельности: {lost[1]:.0f} млн.руб.")
         st.subheader(f"Прибыль упущенная из-за отсутствия роста: {lost[2]:.0f} млн.руб.")
-        st.plotly_chart(fig, use_container_width=False, sharing="streamlit")
+        graph = grafik()
+        st.plotly_chart(graph, use_container_width=False, sharing="streamlit")
 
 # Вызываем приложение
 show_predict_page()

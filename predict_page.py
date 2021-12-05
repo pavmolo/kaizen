@@ -2,17 +2,20 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
-sector_av_ebitda_margin_table = {'Consumer Discretionary': 22.216970460607886, 'Consumer Staples': 23.146861043187315, 'Energy': 38.69977063208259,
-                                 'Financials': 41.085547708295664, 'Health Care': 29.385876126208842, 'Industrials': 22.38041537508514,
-                                 'Information Technology': 32.313896822280405, 'Materials': 23.230850464225615,
-                                 'Real Estate': 76.070948087517, 'Telecommunication Services': 37.41939100247284, 'Utilities': 44.15140491944504}
+gsheetid = '1S7gJojFKedjSvSRM9npIDAzN_6mkSZhgEdGpNbxXnK0'
+list_1 = 'sector_margin'
+list_2 = 'growth_rate'
 
-gro_state = {'Много небольших участников на конкурентом рынке': 0.3,
-            'В моем секторе есть крупные игроки, в число которых я не вхожу': 0.5,
-            'В моем секторе есть крупные игроки, в том числе я': 0.2,
-            'Я монополист': 0.05}
-gro_state_list = list(gro_state.keys())
-industry_list = list(sector_av_ebitda_margin_table.keys())
+df_sector_margin_csv = "https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}".format(gsheetid, list_1)
+df_growth_rate_csv = "https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}".format(gsheetid, list_2)
+
+df_sector_margin = pd.read_csv(df_sector_margin_csv)
+df_growth_rate = pd.read_csv(df_growth_rate_csv)
+df_growth_rate.set_index('growth_state', inplace=True)
+df_sector_margin.set_index('sector', inplace=True)
+
+gro_state_list = df_growth_rate.index
+industry_list = df_sector_margin.index
 
 
 def lost_profit(ind, mar, rev, marg, gro):

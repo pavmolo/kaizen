@@ -24,9 +24,9 @@ def lost_profit(ind, mar, rev, marg, gro):
     growth_rate = df_growth_rate[mar]
     margin_ind_rate = df_sector_margin[ind]
     potencial_profit = rev * (margin_ind_rate)
-    act_profit = marg * rev
+    act_profit = (marg / 100) * rev
     profit_delta_qdc = max(potencial_profit - act_profit, 0.05 * act_profit)
-    profit_delta_growth = max((growth_rate - gro), 0.005 * rev)
+    profit_delta_growth = max((growth_rate - (gro / 100)), 0.005 * rev)
     profit_delta_total = profit_delta_qdc + profit_delta_growth
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
 

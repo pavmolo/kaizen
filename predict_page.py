@@ -33,9 +33,7 @@ def lost_profit(ind, mar, rev, marg, gro):
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
 
 # Прорисовываем график
-fig = fig = go.Figure(go.Waterfall(name = "20", orientation = "v", measure = ["total", "relative", "relative"], 
-                                   x = ["Общая дельта", "Операционная дельта", "Дельта роста"], textposition = "outside", 
-                                   text = [lost[0], -lost[1], -lost[2]], y = lost, connector = {"line":{"color":"rgb(63, 63, 63)"}}))
+
 
 # Функция приложения
 def show_predict_page():
@@ -51,6 +49,11 @@ def show_predict_page():
     ok = st.button("Определить прибыль")
     if ok:
         lost = lost_profit(industry, market_state, revenue, margin, growth)
+        fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["total", "relative", "relative"],
+                                           x=["Общая дельта", "Операционная дельта", "Дельта роста"],
+                                           textposition="outside",
+                                           text=[lost[0], -lost[1], -lost[2]], y=lost,
+                                           connector={"line": {"color": "rgb(63, 63, 63)"}}))
         st.subheader(f"Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: {lost[0]:.0f} млн. руб.")
         st.subheader(f"в том числе:")
         st.subheader(f"Прибыль упущенная в операционной деятельности: {lost[1]:.0f} млн.руб.")

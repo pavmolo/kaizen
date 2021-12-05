@@ -21,15 +21,14 @@ gro_state_list = df_growth_rate.index
 industry_list = df_sector_margin.index
 
 # Прорисовываем график
-fig = go.Figure(go.Waterfall(
+fig = go.Waterfall(
 name = "20", orientation = "v",
 measure = ["total", "relative", "relative"],
 x = ["Общая дельта", "Операционная дельта", "Дельта роста"],
 textposition = "outside",
 text = [lost[0], -lost[1], -lost[2]],
-y = [lost[0], lost[1], lost[2]],
-connector = {"line":{"color":"rgb(63, 63, 63)"}},
-))
+y = lost,
+connector = {"line":{"color":"rgb(63, 63, 63)"}})
 
 # Функция прибыли
 def lost_profit(ind, mar, rev, marg, gro):

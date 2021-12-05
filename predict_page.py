@@ -58,10 +58,10 @@ def show_predict_page():
         def grafik():
             fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],
                                          x=["Общая дельта", "Операционная дельта", "Дельта роста"],
-                                         textposition="outside",
+                                         textposition="inside",
                                          text=lost, y=[lost[0], -lost[1], -lost[2]],
                                          connector={"line": {"color": "rgb(63, 63, 63)"}}))
-            fig.update_layout(title = "Потери прибыли, млн. руб. в год", showlegend = True)
+            fig.update_layout(title = "Потери прибыли, млн. руб. в год")
             return fig
         graph = grafik()
         st.plotly_chart(graph, use_container_width=False, sharing="streamlit")

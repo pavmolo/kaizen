@@ -26,7 +26,7 @@ def lost_profit(ind, mar, rev, marg, gro):
     potencial_profit = rev * (margin_ind_rate / 100)
     act_profit = (marg / 100) * rev
     profit_delta_qdc = max(potencial_profit - act_profit, 0.05 * act_profit, 0.02 * rev)
-    profit_delta_growth = max((growth_rate - gro / 100) * rev * (margin_ind_rate / 100), 0.04 * rev)
+    profit_delta_growth = max((growth_rate - gro / 100) * rev * (margin_ind_rate / 100), 0.02 * rev)
     profit_delta_total = profit_delta_qdc + profit_delta_growth
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
 

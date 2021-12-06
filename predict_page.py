@@ -84,6 +84,7 @@ def show_predict_page():
         st.plotly_chart(graph, use_container_width=False, sharing="streamlit")
         
         if st.button("Далее"):
+            st.title("Оцените следующие аспекты вашей компании:")
             anw_0 = st.radio(df_deltas_breakdown.index[0], answers_list, index=0)
             anw_1 = st.radio(df_deltas_breakdown.index[1], answers_list, index=0)
             anw_2 = st.radio(df_deltas_breakdown.index[2], answers_list, index=0)

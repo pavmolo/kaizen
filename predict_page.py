@@ -95,7 +95,9 @@ def show_predict_page():
     anw_10 = st.radio(df_deltas_breakdown.index[10], answers_list, index=0)
     lost_raz = break_down(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10)
     fig_2 = go.Figure(go.Bar(x=lost_raz.index, y=lost_raz))
-    fig_2.update_layout(title = "Разивка операционной дельты")
+    fig_2.update_layout(title = "Разбивка операционной дельты")
+    fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
+    fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
     st.plotly_chart(fig_2, use_container_width=False, sharing="streamlit")
 
 # Вызываем приложение

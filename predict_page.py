@@ -83,7 +83,7 @@ def show_predict_page():
         graph = grafik()
         st.plotly_chart(graph, use_container_width=False, sharing="streamlit")
         st.title("Оцените следующие аспекты вашей компании:")
-        anw_0 = st.radio(df_deltas_breakdown.index[0], answers_list, index=0)
+        anw_0 = st.radio(df_deltas_breakdown.index[0], list(answers_list), index=0)
         st.markdown(anw_0)
         
 

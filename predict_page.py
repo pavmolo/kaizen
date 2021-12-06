@@ -38,6 +38,7 @@ def lost_profit(ind, mar, rev, marg, gro):
 
 # Функция приложения
 def show_predict_page():
+    st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=32 height=32>](https://streamlit.io/)'''.format(img_to_bytes("logomark_website.png")), unsafe_allow_html=True)
     st.title("Определи свой потенциал")
     st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
 

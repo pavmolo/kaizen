@@ -89,16 +89,17 @@ def show_predict_page():
     col2.metric("Потери прибыли в ОПЕРАЦИЯХ", f'{lost[1]:.0f} млн. руб.', f'{proc_lost_1:.0f}% выручки')
     col3.metric("Потери прибыли в РОСТЕ", f'{lost[2]:.0f} млн. руб.', f'{proc_lost_2:.0f}% выручки')
     # st.markdown(f'Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: <b>{lost[0]:.0f}</b> млн. руб. <p> в том числе: <p>Операционная Дельта (прибыль упущенная в операционной деятельности): <b>{lost[1]:.0f}</b> млн. руб.<p> Дельта Роста (прибыль упущенная из-за отсутствия роста): <b>{lost[2]:.0f}</b> млн. руб.', unsafe_allow_html=True)
-    def grafik():
+    
+    if revenue != 0:
         fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],
                                      x=["Общая дельта", "Операционная дельта", "Дельта роста"],
                                      text=lost, y=[lost[0], -lost[1], -lost[2]],
                                      textposition="auto",
                                      connector={"line": {"color": "rgb(63, 63, 63)"}}))
         fig.update_layout(title = "Потери прибыли, млн. руб. в год")
-        return fig
-    graph = grafik()
-    st.plotly_chart(graph, use_container_width=False, sharing="streamlit")
+        st.plotly_chart(fig, use_container_width=False, sharing="streamlit")
+        
+    
     st.title("Оцените следующие аспекты вашей компании")
     st.subheader("Операционные аспекты:")
     anw_0 = st.radio(df_deltas_breakdown.index[0], answers_list, index=0)

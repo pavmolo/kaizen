@@ -52,7 +52,7 @@ def show_predict_page():
     if ok:
         lost = lost_profit(industry, market_state, revenue, margin, growth)
         lost = pd.Series(lost).round(0)
-        st.markdown(f'Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: <h1>{lost[0]}</h1>', unsafe_allow_html=True)
+        st.markdown(f'Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: <b>{lost[0]}</b>', unsafe_allow_html=True)
         st.subheader(f"в том числе:")
         st.subheader(f"Прибыль упущенная в операционной деятельности: {lost[1]:.0f} млн.руб.")
         st.subheader(f"Прибыль упущенная из-за отсутствия роста: {lost[2]:.0f} млн.руб.")

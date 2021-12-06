@@ -22,7 +22,10 @@ df_growth_rate = pd.Series(df_growth_rate['growth_rate'])
 gro_state_list = df_growth_rate.index
 industry_list = df_sector_margin.index
 
-
+def img_to_bytes(img_path):
+    img_bytes = Path(img_path).read_bytes()
+    encoded = base64.b64encode(img_bytes).decode()
+    return encoded
 # Функция прибыли
 def lost_profit(ind, mar, rev, marg, gro):
     growth_rate = df_growth_rate[mar]

@@ -50,7 +50,7 @@ def show_predict_page():
     ok = st.button("Определить прибыль")
     if ok:
         lost = lost_profit(industry, market_state, revenue, margin, growth)
-        lost = lost.round(0)
+        lost = pd.Series(lost).round(0)
         st.subheader(f"Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: {lost[0]:.0f} млн. руб.")
         st.subheader(f"в том числе:")
         st.subheader(f"Прибыль упущенная в операционной деятельности: {lost[1]:.0f} млн.руб.")

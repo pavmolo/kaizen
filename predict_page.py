@@ -94,7 +94,7 @@ def show_predict_page():
     anw_9 = st.radio(df_deltas_breakdown.index[9], answers_list, index=0)
     anw_10 = st.radio(df_deltas_breakdown.index[10], answers_list, index=0)
     lost_raz = break_down(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10)
-    st.markdown(lost_raz[0])
+    st.markdown(lost_raz)
 
 
 # Вызываем приложение

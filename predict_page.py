@@ -46,7 +46,10 @@ def lost_profit(ind, mar, rev, marg, gro):
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
    
 def break_down(a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11):
-    arg_list = pd.Series([a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11], index=df_deltas_breakdown.head(11).index)
+    table = df_answer_score[['answer', 'answer_score']].set_index('answer')
+    table = pd.Series(table['answer_score'])
+    arg_list = pd.Series([table[a_1], table[a_2], table[a_3], table[a_4], table[a_5], table[a_6], 
+                          table[a_7], table[a_8], table[a_9], table[a_10], table[a_11]], index=df_deltas_breakdown.head(11).index)
     prom_list = arg_list * df_deltas_breakdown.head(11)
     sum_prom = prom_list.sum()
     return pd.Series(prom_list / sum_prom, index=df_deltas_breakdown.head(11).index)

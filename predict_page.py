@@ -105,7 +105,7 @@ def show_predict_page():
     anw_8 = st.radio(df_deltas_breakdown.index[8], answers_list, index=0)
     anw_9 = st.radio(df_deltas_breakdown.index[9], answers_list, index=0)
     anw_10 = st.radio(df_deltas_breakdown.index[10], answers_list, index=0)
-    st.subheader("Аспекрты роста:")
+    st.subheader("Аспекты роста:")
     anw_11 = st.radio(df_deltas_breakdown.index[11], answers_list, index=0)
     anw_12 = st.radio(df_deltas_breakdown.index[12], answers_list, index=0)
     anw_13 = st.radio(df_deltas_breakdown.index[13], answers_list, index=0)
@@ -113,8 +113,10 @@ def show_predict_page():
     anw_15 = st.radio(df_deltas_breakdown.index[15], answers_list, index=0)
     anw_16 = st.radio(df_deltas_breakdown.index[16], answers_list, index=0)    
     
-    lost_oper = break_down(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10) * lost[1]
-    lost_growth = break_down_g(anw_11, anw_12, anw_13, anw_14, anw_15, anw_16) * lost[2]
+    lost_oper_full = break_down(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10)[] * lost[1]
+    lost_growth_full = break_down_g(anw_11, anw_12, anw_13, anw_14, anw_15, anw_16) * lost[2]
+    lost_oper = lost_oper_full[lost_oper_full > 0]
+    lost_growth = lost_growth_full[lost_growth_full > 0]
     
     fig_2 = px.bar(lost_oper, x=0, y=lost_oper.index)
     fig_3 = px.bar(lost_growth, x=0, y=lost_growth.index)

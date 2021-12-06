@@ -57,15 +57,15 @@ def lost_profit(ind, mar, rev, marg, gro):
 
 # Функция приложения
 def show_predict_page():
-    st.markdown('''<img src='https://www.kaizen.com/images/kaizen_logo.png' style="max-width: 30%;"><p>''', unsafe_allow_html=True)
-    st.title("Определи свой потенциал")
-    st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
+    st.sidebar.markdown('''<img src='https://www.kaizen.com/images/kaizen_logo.png' style="max-width: 30%;"><p>''', unsafe_allow_html=True)
+    st.sidebar.title("Определи свой потенциал")
+    st.sidebar.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
 
-    industry = st.selectbox("Ваша отрасль:", industry_list)
-    market_state = st.selectbox("Охарактеризуйте состояние сектора, в котором вы работаете:", gro_state_list)
-    revenue = st.number_input("Какова ваша выручка, млн, руб. в год:", value=0)
-    margin = st.slider("Какова ваша маржа операционной прибыли, % к выручке:", -20, 80, 0, 2)
-    growth = st.slider("Каков ваш среднегодовой рост выручки в % за последние 3 года", -20, 100, 0, 5)
+    industry = st.sidebar.selectbox("Ваша отрасль:", industry_list)
+    market_state = st.sidebar.selectbox("Охарактеризуйте состояние сектора, в котором вы работаете:", gro_state_list)
+    revenue = st.sidebar.number_input("Какова ваша выручка, млн, руб. в год:", value=0)
+    margin = st.sidebar.slider("Какова ваша маржа операционной прибыли, % к выручке:", -20, 80, 0, 2)
+    growth = st.sidebar.slider("Каков ваш среднегодовой рост выручки в % за последние 3 года", -20, 100, 0, 5)
 
     if st.button("Определить прибыль"):
         lost = lost_profit(industry, market_state, revenue, margin, growth)

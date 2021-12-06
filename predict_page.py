@@ -8,20 +8,33 @@ import plotly.graph_objects as go
 gsheetid = '1S7gJojFKedjSvSRM9npIDAzN_6mkSZhgEdGpNbxXnK0'
 list_1 = 'sector_margin'
 list_2 = 'growth_rate'
+list_3 = 'deltas_breakdown'
+list_4 = 'answer_score'
 
 df_sector_margin_csv = "https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}".format(gsheetid, list_1)
 df_growth_rate_csv = "https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}".format(gsheetid, list_2)
+deltas_breakdown_csv = "https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}".format(gsheetid, list_3)
+answer_score_csv = "https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}".format(gsheetid, list_4)
+
 
 df_sector_margin = pd.read_csv(df_sector_margin_csv)
 df_growth_rate = pd.read_csv(df_growth_rate_csv)
+df_deltas_breakdown = pd.read_csv(deltas_breakdown_csv)
+df_answer_score = pd.read_csv(answer_score_csv)
+
+
 df_growth_rate.set_index('growth_state', inplace=True)
 df_sector_margin.set_index('sector', inplace=True)
+df_deltas_breakdown.set_index('answer', inplace=True)
+df_answer_score.set_index('answer_id', inplace=True)
+
 df_sector_margin = pd.Series(df_sector_margin['margin'])
 df_growth_rate = pd.Series(df_growth_rate['growth_rate'])
+df_deltas_breakdown = pd.Series(df_deltas_breakdown['question_score'])
 
 gro_state_list = df_growth_rate.index
 industry_list = df_sector_margin.index
-
+answers_list = df_answer_score['answer']
 
 # Функция прибыли
 def lost_profit(ind, mar, rev, marg, gro):
@@ -34,7 +47,30 @@ def lost_profit(ind, mar, rev, marg, gro):
     profit_delta_total = profit_delta_qdc + profit_delta_growth
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
 
-# Прорисовываем график
+def lost_breaksown(a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11):
+    return sum(a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11)
+    
+
+    
+def break():
+    anw_0 = st.radio(df_deltas_breakdown.index[0], answers_list, index=0)
+    anw_1 = st.radio(df_deltas_breakdown.index[1], answers_list, index=0)
+    anw_2 = st.radio(df_deltas_breakdown.index[2], answers_list, index=0)
+    anw_3 = st.radio(df_deltas_breakdown.index[3], answers_list, index=0)
+    anw_4 = st.radio(df_deltas_breakdown.index[4], answers_list, index=0)
+    anw_5 = st.radio(df_deltas_breakdown.index[5], answers_list, index=0)
+    anw_6 = st.radio(df_deltas_breakdown.index[6], answers_list, index=0)
+    anw_7 = st.radio(df_deltas_breakdown.index[7], answers_list, index=0)
+    anw_8 = st.radio(df_deltas_breakdown.index[8], answers_list, index=0)
+    anw_9 = st.radio(df_deltas_breakdown.index[9], answers_list, index=0)
+    anw_10 = st.radio(df_deltas_breakdown.index[10], answers_list, index=0)
+    ok = st.button("Разбить дельту")
+    if ok:
+        st.title("Результат")
+        lost_raz = lost_breaksown(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10)
+        st.title(lost_raz)
+    
+    
 
 # Функция приложения
 def show_predict_page():
@@ -64,6 +100,8 @@ def show_predict_page():
             return fig
         graph = grafik()
         st.plotly_chart(graph, use_container_width=False, sharing="streamlit")
+        break()
+
 
 # Вызываем приложение
 show_predict_page()

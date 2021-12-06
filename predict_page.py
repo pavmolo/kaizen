@@ -116,8 +116,8 @@ def show_predict_page():
     lost_oper = break_down(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10) * lost[1]
     lost_growth = break_down_g(anw_11, anw_12, anw_13, anw_14, anw_15, anw_16) * lost[2]
     
-    fig_2 = px.bar(lost_oper, x='year', y='pop')
-    fig_3 = px.bar(lost_growth, x='year', y='pop')
+    fig_2 = px.bar(lost_oper, x=0, y=lost_oper.index)
+    fig_3 = px.bar(lost_growth, x=0, y=lost_growth.index)
     # fig_2 = go.Figure(go.Bar(x=lost_oper.index, y=lost_oper))
     fig_2.update_layout(title = "Разбивка операционной дельты")
     fig_3.update_layout(title = "Разбивка дельты роста")

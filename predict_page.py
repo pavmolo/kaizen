@@ -69,7 +69,7 @@ def break_down_g(a_12, a_13, a_14, a_15, a_16, a_17):
     
 # Функция приложения
 def show_predict_page():
-    st.markdown('''<a href="http://ru.kaizen.com/"><img src='https://www.kaizen.com/images/kaizen_logo.png' style="max-width: 50%;"></a><p>''', unsafe_allow_html=True)
+    st.markdown('''<a href="http://ru.kaizen.com/"><img src='https://www.kaizen.com/images/kaizen_logo.png' style="max-width: 50%; margin-left: auto; margin-right: auto;"></a><p>''', unsafe_allow_html=True)
     st.title("Определи свой потенциал")
     st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
 

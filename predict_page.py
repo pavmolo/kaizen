@@ -82,9 +82,9 @@ def show_predict_page():
     lost = pd.Series(lost).round(0)
     st.title("Результат")
     col1, col2, col3 = st.columns(3)
-    st.col1.metric("Общая упущенная прибыль", lost[0], f'{lost[0] / revenue * 100}%')
-    st.col2.metric("Wind", "9 mph", "-8%")
-    st.col3.metric("Humidity", "86%", "4%")
+    col1.metric("Общая упущенная прибыль", lost[0], f'{lost[0] / revenue * 100}%')
+    col2.metric("Wind", "9 mph", "-8%")
+    col3.metric("Humidity", "86%", "4%")
     # st.markdown(f'Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: <b>{lost[0]:.0f}</b> млн. руб. <p> в том числе: <p>Операционная Дельта (прибыль упущенная в операционной деятельности): <b>{lost[1]:.0f}</b> млн. руб.<p> Дельта Роста (прибыль упущенная из-за отсутствия роста): <b>{lost[2]:.0f}</b> млн. руб.', unsafe_allow_html=True)
     def grafik():
         fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],

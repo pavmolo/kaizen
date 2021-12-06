@@ -38,7 +38,7 @@ def lost_profit(ind, mar, rev, marg, gro):
 
 # Функция приложения
 def show_predict_page():
-    st.sidebar.markdown('<img src='https://www.kaizen.com/images/kaizen_logo.png', unsafe_allow_html=True)
+    st.sidebar.markdown('''<img src='https://www.kaizen.com/images/kaizen_logo.png''', unsafe_allow_html=True)
     st.title("Определи свой потенциал")
     st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
 

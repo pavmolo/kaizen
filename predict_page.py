@@ -84,23 +84,24 @@ def show_predict_page():
             return fig
         graph = grafik()
         st.plotly_chart(graph, use_container_width=False, sharing="streamlit")
-        
-        anw_0 = st.radio(df_deltas_breakdown.index[0], answers_list, index=0)
-        anw_1 = st.radio(df_deltas_breakdown.index[1], answers_list, index=0)
-        anw_2 = st.radio(df_deltas_breakdown.index[2], answers_list, index=0)
-        anw_3 = st.radio(df_deltas_breakdown.index[3], answers_list, index=0)
-        anw_4 = st.radio(df_deltas_breakdown.index[4], answers_list, index=0)
-        anw_5 = st.radio(df_deltas_breakdown.index[5], answers_list, index=0)
-        anw_6 = st.radio(df_deltas_breakdown.index[6], answers_list, index=0)
-        anw_7 = st.radio(df_deltas_breakdown.index[7], answers_list, index=0)
-        anw_8 = st.radio(df_deltas_breakdown.index[8], answers_list, index=0)
-        anw_9 = st.radio(df_deltas_breakdown.index[9], answers_list, index=0)
-        anw_10 = st.radio(df_deltas_breakdown.index[10], answers_list, index=0)
-        break_it = st.button("Разбить дельту")
-        if break_it:
-            st.title("Результат")
-            lost_raz = lost_breaksown(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10)
-            st.title(lost_raz)
+        next_it = st.button("Далее")
+        if next_it:
+            anw_0 = st.radio(df_deltas_breakdown.index[0], answers_list, index=0)
+            anw_1 = st.radio(df_deltas_breakdown.index[1], answers_list, index=0)
+            anw_2 = st.radio(df_deltas_breakdown.index[2], answers_list, index=0)
+            anw_3 = st.radio(df_deltas_breakdown.index[3], answers_list, index=0)
+            anw_4 = st.radio(df_deltas_breakdown.index[4], answers_list, index=0)
+            anw_5 = st.radio(df_deltas_breakdown.index[5], answers_list, index=0)
+            anw_6 = st.radio(df_deltas_breakdown.index[6], answers_list, index=0)
+            anw_7 = st.radio(df_deltas_breakdown.index[7], answers_list, index=0)
+            anw_8 = st.radio(df_deltas_breakdown.index[8], answers_list, index=0)
+            anw_9 = st.radio(df_deltas_breakdown.index[9], answers_list, index=0)
+            anw_10 = st.radio(df_deltas_breakdown.index[10], answers_list, index=0)
+            break_it = st.button("Разбить дельту")
+            if break_it:
+                st.title("Результат")
+                lost_raz = lost_breaksown(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10)
+                st.title(lost_raz)
 
 
 # Вызываем приложение

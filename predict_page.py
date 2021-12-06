@@ -113,7 +113,7 @@ def show_predict_page():
     anw_15 = st.radio(df_deltas_breakdown.index[15], answers_list, index=0)
     anw_16 = st.radio(df_deltas_breakdown.index[16], answers_list, index=0)    
     
-    lost_oper_full = break_down(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10)[] * lost[1]
+    lost_oper_full = break_down(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10) * lost[1]
     lost_growth_full = break_down_g(anw_11, anw_12, anw_13, anw_14, anw_15, anw_16) * lost[2]
     lost_oper = lost_oper_full[lost_oper_full > 0]
     lost_growth = lost_growth_full[lost_growth_full > 0]

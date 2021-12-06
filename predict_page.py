@@ -68,8 +68,7 @@ def show_predict_page():
     margin = st.slider("Какова ваша маржа операционной прибыли, % к выручке:", -20, 80, 0, 2)
     growth = st.slider("Каков ваш среднегодовой рост выручки в % за последние 3 года", -20, 100, 0, 5)
 
-    ok = st.button("Определить прибыль")
-    if ok:
+    if st.button("Определить прибыль"):
         lost = lost_profit(industry, market_state, revenue, margin, growth)
         lost = pd.Series(lost).round(0)
         st.title("Результат")
@@ -84,8 +83,8 @@ def show_predict_page():
             return fig
         graph = grafik()
         st.plotly_chart(graph, use_container_width=False, sharing="streamlit")
-        next_it = st.button("Далее")
-        if next_it:
+        
+        if st.button("Далее"):
             anw_0 = st.radio(df_deltas_breakdown.index[0], answers_list, index=0)
             anw_1 = st.radio(df_deltas_breakdown.index[1], answers_list, index=0)
             anw_2 = st.radio(df_deltas_breakdown.index[2], answers_list, index=0)
@@ -97,8 +96,8 @@ def show_predict_page():
             anw_8 = st.radio(df_deltas_breakdown.index[8], answers_list, index=0)
             anw_9 = st.radio(df_deltas_breakdown.index[9], answers_list, index=0)
             anw_10 = st.radio(df_deltas_breakdown.index[10], answers_list, index=0)
-            break_it = st.button("Разбить дельту")
-            if break_it:
+            
+            if st.button("Разбить дельту"):
                 st.title("Результат")
                 lost_raz = lost_breaksown(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10)
                 st.title(lost_raz)

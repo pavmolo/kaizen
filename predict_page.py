@@ -119,7 +119,7 @@ def show_predict_page():
     fig_2 = px.bar(lost_oper, x=0, y=lost_oper.index)
     fig_3 = px.bar(lost_growth, x=0, y=lost_growth.index)
     # fig_2 = go.Figure(go.Bar(x=lost_oper.index, y=lost_oper))
-    fig_2.update_layout(title = "Разбивка операционной дельты", width=700)
+    fig_2.update_layout(title = "Разбивка операционной дельты", width=900)
     fig_3.update_layout(title = "Разбивка дельты роста")
 
     st.plotly_chart(fig_2, use_container_width=False, sharing="streamlit")

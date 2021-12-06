@@ -120,8 +120,8 @@ def show_predict_page():
     
     fig_2 = px.bar(lost_oper, x=0, y=lost_oper.index)
     fig_3 = px.bar(lost_growth, x=0, y=lost_growth.index)
-    fig_2.update_layout(title = "Разбивка операционной дельты", width=900)
-    fig_3.update_layout(title = "Разбивка дельты роста", width=900)
+    fig_2.update_layout(title = "Разбивка операционной дельты", width=900, xaxis_title="млн. руб. упущенной прибыли", yaxis_title="Операционные факторы Kaizen")
+    fig_3.update_layout(title = "Разбивка дельты роста", width=900, xaxis_title="млн. руб. упущенной прибыли", yaxis_title="Факторы Роста Kaizen")
 
     st.plotly_chart(fig_2, use_container_width=False, sharing="streamlit")
     st.plotly_chart(fig_3, use_container_width=False, sharing="streamlit")

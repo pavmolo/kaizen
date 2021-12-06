@@ -57,9 +57,10 @@ def show_predict_page():
         st.subheader(f"Прибыль упущенная в операционной деятельности: {lost[1]:.0f} млн.руб.")
         st.subheader(f"Прибыль упущенная из-за отсутствия роста: {lost[2]:.0f} млн.руб.")
         def grafik():
-            fig = go.Figure(go.Waterfall(name="20", orientation="h", measure=["absolute", "relative", "relative"],
-                                         y=["Общая дельта", "Операционная дельта", "Дельта роста"],
-                                         text=lost, x=[lost[0], -lost[1], -lost[2]],
+            fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],
+                                         x=["Общая дельта", "Операционная дельта", "Дельта роста"],
+                                         text=lost, y=[lost[0], -lost[1], -lost[2]],
+                                         textposition="auto",
                                          connector={"line": {"color": "rgb(63, 63, 63)"}}))
             fig.update_layout(title = "Потери прибыли, млн. руб. в год")
             return fig

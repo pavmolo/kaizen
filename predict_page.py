@@ -94,8 +94,14 @@ def show_predict_page():
     anw_9 = st.radio(df_deltas_breakdown.index[9], answers_list, index=0)
     anw_10 = st.radio(df_deltas_breakdown.index[10], answers_list, index=0)
     lost_raz = break_down(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10)
-    st.markdown(lost_raz)
-
+    fig_2 = go.Figure(go.Waterfall(name="20", orientation="v", measure=["relative", "relative", "relative", "relative", "relative", 
+                                                                        "relative", "relative", "relative", "relative", "relative", "relative", "relative"],
+                                     x=lost_raz.index,
+                                     text=lost, y=lost_raz,
+                                     textposition="auto",
+                                     connector={"line": {"color": "rgb(63, 63, 63)"}}))
+    fig_2.update_layout(title = "Разивка операционной дельты")
+    st.plotly_chart(fig_2, use_container_width=False, sharing="streamlit")
 
 # Вызываем приложение
 show_predict_page()

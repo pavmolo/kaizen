@@ -46,14 +46,7 @@ def lost_profit(ind, mar, rev, marg, gro):
     profit_delta_growth = max(((growth_rate - (gro / 100)) * rev * margin_ind_rate), 0.005 * rev)
     profit_delta_total = profit_delta_qdc + profit_delta_growth
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
-
-
-    
-
-    
-    
-    
-    
+   
 
 # Функция приложения
 def show_predict_page():
@@ -66,25 +59,23 @@ def show_predict_page():
     revenue = st.sidebar.number_input("Какова ваша выручка, млн, руб. в год:", value=0)
     margin = st.sidebar.slider("Какова ваша маржа операционной прибыли, % к выручке:", -20, 80, 0, 2)
     growth = st.sidebar.slider("Каков ваш среднегодовой рост выручки в % за последние 3 года", -20, 100, 0, 5)
-
-    if st.sidebar.button("Определить прибыль"):
-        lost = lost_profit(industry, market_state, revenue, margin, growth)
-        lost = pd.Series(lost).round(0)
-        st.title("Результат")
-        st.markdown(f'Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: <b>{lost[0]:.0f}</b> млн. руб. <p> в том числе: <p>Операционная Дельта (прибыль упущенная в операционной деятельности): <b>{lost[1]:.0f}</b> млн. руб.<p> Дельта Роста (прибыль упущенная из-за отсутствия роста): <b>{lost[2]:.0f}</b> млн. руб.', unsafe_allow_html=True)
-        def grafik():
-            fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],
-                                         x=["Общая дельта", "Операционная дельта", "Дельта роста"],
-                                         text=lost, y=[lost[0], -lost[1], -lost[2]],
-                                         textposition="auto",
-                                         connector={"line": {"color": "rgb(63, 63, 63)"}}))
-            fig.update_layout(title = "Потери прибыли, млн. руб. в год")
-            return fig
-        graph = grafik()
-        st.plotly_chart(graph, use_container_width=False, sharing="streamlit")
-        st.title("Оцените следующие аспекты вашей компании:")
-        anw_0 = st.radio(df_deltas_breakdown.index[0], list(answers_list), index=0)
-        st.markdown(anw_0)
+    lost = lost_profit(industry, market_state, revenue, margin, growth)
+    lost = pd.Series(lost).round(0)
+    st.title("Результат")
+    st.markdown(f'Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: <b>{lost[0]:.0f}</b> млн. руб. <p> в том числе: <p>Операционная Дельта (прибыль упущенная в операционной деятельности): <b>{lost[1]:.0f}</b> млн. руб.<p> Дельта Роста (прибыль упущенная из-за отсутствия роста): <b>{lost[2]:.0f}</b> млн. руб.', unsafe_allow_html=True)
+    def grafik():
+        fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],
+                                     x=["Общая дельта", "Операционная дельта", "Дельта роста"],
+                                     text=lost, y=[lost[0], -lost[1], -lost[2]],
+                                     textposition="auto",
+                                     connector={"line": {"color": "rgb(63, 63, 63)"}}))
+        fig.update_layout(title = "Потери прибыли, млн. руб. в год")
+        return fig
+    graph = grafik()
+    st.plotly_chart(graph, use_container_width=False, sharing="streamlit")
+    st.title("Оцените следующие аспекты вашей компании:")
+    anw_0 = st.radio(df_deltas_breakdown.index[0], list(answers_list), index=0)
+    st.markdown(anw_0)
         
 
 

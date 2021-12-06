@@ -67,7 +67,7 @@ def show_predict_page():
     margin = st.sidebar.slider("Какова ваша маржа операционной прибыли, % к выручке:", -20, 80, 0, 2)
     growth = st.sidebar.slider("Каков ваш среднегодовой рост выручки в % за последние 3 года", -20, 100, 0, 5)
 
-    if st.button("Определить прибыль"):
+    if st.sidebar.button("Определить прибыль"):
         lost = lost_profit(industry, market_state, revenue, margin, growth)
         lost = pd.Series(lost).round(0)
         st.title("Результат")

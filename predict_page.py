@@ -85,9 +85,9 @@ def show_predict_page():
     proc_lost_rev = - (lost[0] / revenue * 100)
     proc_lost_1 = - (lost[1] / revenue * 100)
     proc_lost_2 = - (lost[2] / revenue * 100)
-    col1.metric("Общая упущенная прибыль", lost[0], f'{proc_lost_rev:.0f}% выручки')
-    col2.metric("Потери прибыли в ОПЕРАЦИЯХ", lost[1], f'{proc_lost_1:.0f}% выручки')
-    col3.metric("Потери прибыли в РОСТЕ", lost[2], f'{proc_lost_2:.0f}% выручки')
+    col1.metric("ОБЩАЯ упущенная прибыль", f'{lost[0]:.0f} млн. руб.', f'{proc_lost_rev:.0f}% выручки')
+    col2.metric("Потери прибыли в ОПЕРАЦИЯХ", f'{lost[1]:.0f} млн. руб.', f'{proc_lost_1:.0f}% выручки')
+    col3.metric("Потери прибыли в РОСТЕ", f'{lost[2]:.0f} млн. руб.', f'{proc_lost_2:.0f}% выручки')
     # st.markdown(f'Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: <b>{lost[0]:.0f}</b> млн. руб. <p> в том числе: <p>Операционная Дельта (прибыль упущенная в операционной деятельности): <b>{lost[1]:.0f}</b> млн. руб.<p> Дельта Роста (прибыль упущенная из-за отсутствия роста): <b>{lost[2]:.0f}</b> млн. руб.', unsafe_allow_html=True)
     def grafik():
         fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],

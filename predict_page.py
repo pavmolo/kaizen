@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
+import plotly.express as px
 
 gsheetid = '1S7gJojFKedjSvSRM9npIDAzN_6mkSZhgEdGpNbxXnK0'
 list_1 = 'sector_margin'
@@ -44,16 +45,26 @@ def lost_profit(ind, mar, rev, marg, gro):
     profit_delta_growth = max(((growth_rate - (gro / 100)) * rev * margin_ind_rate), 0.005 * rev)
     profit_delta_total = profit_delta_qdc + profit_delta_growth
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
-   
+
+operation_breakdown_elems = 11
+groth_breakdown_elems = 6
+
 def break_down(a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11):
     table = df_answer_score[['answer', 'answer_score']].set_index('answer')
     table = pd.Series(table['answer_score'])
     arg_list = pd.Series([table[a_1], table[a_2], table[a_3], table[a_4], table[a_5], table[a_6], 
-                          table[a_7], table[a_8], table[a_9], table[a_10], table[a_11]], index=df_deltas_breakdown.head(11).index)
-    prom_list = arg_list * df_deltas_breakdown.head(11)
+                          table[a_7], table[a_8], table[a_9], table[a_10], table[a_11]], index=df_deltas_breakdown.head(operation_breakdown_elems).index)
+    prom_list = arg_list * df_deltas_breakdown.head(operation_breakdown_elems)
     sum_prom = prom_list.sum()
     return pd.Series(prom_list / sum_prom)
-    
+
+def break_down_g(a_12, a_13, a_14, a_15, a_16, a_17):
+    table = df_answer_score[['answer', 'answer_score']].set_index('answer')
+    table = pd.Series(table['answer_score'])
+    arg_list = pd.Series([table[a_12], table[a_13], table[a_14], table[a_15], table[a_16], table[a_17]], index=df_deltas_breakdown.tail(groth_breakdown_elems).index)
+    prom_list = arg_list * df_deltas_breakdown.tail(groth_breakdown_elems)
+    sum_prom = prom_list.sum()
+    return pd.Series(prom_list / sum_prom)
     
     
 # Функция приложения
@@ -81,7 +92,8 @@ def show_predict_page():
         return fig
     graph = grafik()
     st.plotly_chart(graph, use_container_width=False, sharing="streamlit")
-    st.title("Оцените следующие аспекты вашей компании:")
+    st.title("Оцените следующие аспекты вашей компании")
+    st.subheader("Операционные аспекты:")
     anw_0 = st.radio(df_deltas_breakdown.index[0], answers_list, index=0)
     anw_1 = st.radio(df_deltas_breakdown.index[1], answers_list, index=0)
     anw_2 = st.radio(df_deltas_breakdown.index[2], answers_list, index=0)
@@ -93,13 +105,25 @@ def show_predict_page():
     anw_8 = st.radio(df_deltas_breakdown.index[8], answers_list, index=0)
     anw_9 = st.radio(df_deltas_breakdown.index[9], answers_list, index=0)
     anw_10 = st.radio(df_deltas_breakdown.index[10], answers_list, index=0)
+    st.subheader("Аспекрты роста:")
+    anw_11 = st.radio(df_deltas_breakdown.index[11], answers_list, index=0)
+    anw_12 = st.radio(df_deltas_breakdown.index[12], answers_list, index=0)
+    anw_13 = st.radio(df_deltas_breakdown.index[13], answers_list, index=0)
+    anw_14 = st.radio(df_deltas_breakdown.index[14], answers_list, index=0)
+    anw_15 = st.radio(df_deltas_breakdown.index[15], answers_list, index=0)
+    anw_16 = st.radio(df_deltas_breakdown.index[16], answers_list, index=0)    
     
-    lost_raz = break_down(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10) * lost[1]
+    lost_oper = break_down(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10) * lost[1]
+    lost_growth = break_down_g(anw_11, anw_12, anw_13, anw_14, anw_15, anw_16) * lost[2]
     
-    fig_2 = go.Figure(go.Bar(x=lost_raz.index, y=lost_raz))
+    fig_2 = px.bar(lost_oper, x='year', y='pop')
+    fig_3 = px.bar(lost_growth, x='year', y='pop')
+    # fig_2 = go.Figure(go.Bar(x=lost_oper.index, y=lost_oper))
     fig_2.update_layout(title = "Разбивка операционной дельты")
+    fig_3.update_layout(title = "Разбивка дельты роста")
 
     st.plotly_chart(fig_2, use_container_width=False, sharing="streamlit")
+    st.plotly_chart(fig_3, use_container_width=False, sharing="streamlit")
 
 # Вызываем приложение
 show_predict_page()

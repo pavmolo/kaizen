@@ -47,7 +47,15 @@ def lost_profit(ind, mar, rev, marg, gro):
     profit_delta_total = profit_delta_qdc + profit_delta_growth
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
    
-
+def break_down(a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11):
+    arg_list = pd.Series([a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11])
+    prom_list = arg_list * df_deltas_breakdown.head(11)
+    sum_prom = prom_list.sum()
+    
+    return pd.Series(prom_list / sum_prom, index=df_deltas_breakdown.head(11).index)
+    
+    
+    
 # Функция приложения
 def show_predict_page():
     st.sidebar.markdown('''<img src='https://www.kaizen.com/images/kaizen_logo.png' style="max-width: 30%;"><p>''', unsafe_allow_html=True)
@@ -85,6 +93,8 @@ def show_predict_page():
     anw_8 = st.radio(df_deltas_breakdown.index[8], answers_list, index=0)
     anw_9 = st.radio(df_deltas_breakdown.index[9], answers_list, index=0)
     anw_10 = st.radio(df_deltas_breakdown.index[10], answers_list, index=0)
+    lost_raz = break_down(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10)
+    st.markdown(lost_raz)
 
 
 # Вызываем приложение

@@ -47,8 +47,7 @@ def lost_profit(ind, mar, rev, marg, gro):
     profit_delta_total = profit_delta_qdc + profit_delta_growth
     return [profit_delta_total, profit_delta_qdc, profit_delta_growth]
 
-def lost_breaksown(a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11):
-    return sum(a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11)
+
     
 
     
@@ -99,6 +98,8 @@ def show_predict_page():
             
             if st.button("Разбить дельту"):
                 st.title("Результат")
+                def lost_breaksown(a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11):
+                    return sum(a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11)
                 lost_raz = lost_breaksown(anw_0, anw_1, anw_2, anw_3, anw_4, anw_5, anw_6, anw_7, anw_8, anw_9, anw_10)
                 st.title(lost_raz)
 

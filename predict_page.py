@@ -130,7 +130,7 @@ def show_predict_page():
         lost_growth = lost_growth_full[lost_growth_full > 0]
 
         if len(lost_oper) != 0:
-            fig_2 = px.bar(lost_oper, y=0, x=lost_oper.index)
+            fig_2 = go.Figure(data=[go.Bar(x=lost_oper.index, y=lost_oper['0'], text=y, textposition='auto',)]) # px.bar(lost_oper, y=0, x=lost_oper.index)
             fig_2.update_layout(title = "Разбивка операционной дельты", yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Операционные факторы Kaizen")
             st.plotly_chart(fig_2, use_container_width=True, sharing="streamlit")
             

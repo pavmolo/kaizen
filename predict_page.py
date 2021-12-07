@@ -142,7 +142,7 @@ def show_predict_page():
             lost_oper_fin['o_g'] = np.repeat('Операции', operation_breakdown_elems)
             lost_oper_fin['Ответ'] = lost_oper_fin.index
             lost_oper_fin.columns = ['Оценка', 'Направление', 'Аспект']
-            
+
             lost_growth_fin = pd.DataFrame(lost_growth)
             lost_growth_fin['o_g'] = np.repeat('Рост', groth_breakdown_elems)
             lost_growth_fin['Ответ'] = lost_growth_fin.index
@@ -150,7 +150,7 @@ def show_predict_page():
             
             lost_total = lost_oper_fin.append(lost_growth_fin)
             fig_4 = px.sunburst(lost_total, path=['Направление', 'Аспект'], values='Оценка')
-            fig_4.update_layout(title = "Разбивка общей дельты", width=900)
+            
             st.plotly_chart(fig_4, use_container_width=False, sharing="streamlit")
 
 # Вызываем приложение

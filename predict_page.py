@@ -99,7 +99,7 @@ def show_predict_page():
                                      text=lost, y=[lost[0], -lost[1], -lost[2]],
                                      textposition="auto",
                                      connector={"line": {"color": "rgb(63, 63, 63)"}}))
-        fig.update_layout(title = "Потери прибыли, млн. руб. в год")
+        #fig.update_layout(title = "Потери прибыли, млн. руб. в год")
         st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
         
     

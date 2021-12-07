@@ -133,18 +133,19 @@ def show_predict_page():
             fig_2 = px.bar(lost_oper, y=0, x=lost_oper.index)
             fig_2.update_layout(title = "Разбивка операционной дельты", width=900, xaxis_title="млн. руб. упущенной прибыли", yaxis_title="Операционные факторы Kaizen")
             st.plotly_chart(fig_2, use_container_width=False, sharing="streamlit")
+            
         if len(lost_growth) != 0:
             fig_3 = px.bar(lost_growth, y=0, x=lost_growth.index)
             fig_3.update_layout(title = "Разбивка дельты роста", width=900, xaxis_title="млн. руб. упущенной прибыли", yaxis_title="Факторы Роста Kaizen")
             st.plotly_chart(fig_3, use_container_width=False, sharing="streamlit")
             
             lost_oper_fin = pd.DataFrame(lost_oper)
-            lost_oper_fin['o_g'] = np.repeat('Операции', operation_breakdown_elems)
+            lost_oper_fin['o_g'] = np.repeat('Операции', len(lost_oper_fin))
             lost_oper_fin['Ответ'] = lost_oper_fin.index
             lost_oper_fin.columns = ['Оценка', 'Направление', 'Аспект']
 
             lost_growth_fin = pd.DataFrame(lost_growth)
-            lost_growth_fin['o_g'] = np.repeat('Рост', groth_breakdown_elems)
+            lost_growth_fin['o_g'] = np.repeat('Рост', len(lost_growth_fin))
             lost_growth_fin['Ответ'] = lost_growth_fin.index
             lost_growth_fin.columns = ['Оценка', 'Направление', 'Аспект']
             

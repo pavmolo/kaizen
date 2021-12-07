@@ -76,8 +76,8 @@ def show_predict_page():
     st.title("Определи свой потенциал")
     st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
 
-    industry = st.selectbox("Ваша отрасль:", industry_list)
-    market_state = st.selectbox("Охарактеризуйте состояние сектора, в котором вы работаете:", gro_state_list)
+    industry = st.radio("Ваша отрасль:", industry_list)
+    market_state = st.radio("Охарактеризуйте состояние сектора, в котором вы работаете:", gro_state_list)
     revenue = st.number_input("Какова ваша выручка, млн, руб. в год:", value=0)
     margin = st.slider("Какова ваша маржа операционной прибыли, % к выручке:", -20, 80, 0, 2)
     growth = st.slider("Каков ваш среднегодовой рост выручки в % за последние 3 года", -20, 100, 0, 5)

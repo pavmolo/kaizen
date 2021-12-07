@@ -128,12 +128,29 @@ def show_predict_page():
         lost_growth_full = break_down_g(anw_11, anw_12, anw_13, anw_14, anw_15, anw_16) * lost[2]
         lost_oper = lost_oper_full[lost_oper_full > 0]
         lost_growth = lost_growth_full[lost_growth_full > 0]
+        
+        lost_oper_fin = pd.DataFrame(lost_oper)
+        lost_oper_fin['o_g'] = np.repeat('Операции', len(lost_oper_fin))
+        lost_oper_fin['Ответ'] = lost_oper_fin.index
+        lost_oper_fin.columns = ['Оценка', 'Направление', 'Аспект']
 
+        lost_growth_fin = pd.DataFrame(lost_growth)
+        lost_growth_fin['o_g'] = np.repeat('Рост', len(lost_growth_fin))
+        lost_growth_fin['Ответ'] = lost_growth_fin.index
+        lost_growth_fin.columns = ['Оценка', 'Направление', 'Аспект']
+
+        lost_total = lost_oper_fin.append(lost_growth_fin)        
+
+        fig_1 = px.bar(lost_total, y='Оценка', x='Аспект', text='Оценка')
+        fig_1.update_traces(texttemplate='%{text:.2s}', textposition='outside')
+        fig_1.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
+        st.plotly_chart(fig_1, use_container_width=True, sharing="streamlit")        
+'''
         if len(lost_oper) != 0:
-            fig_2 = go.Figure(go.Bar(x=lost_oper.index, y=lost_oper[0], text=y, textposition='auto')) # px.bar(lost_oper, y=0, x=lost_oper.index)
-            #fig_2.update_layout(title = "Разбивка операционной дельты", yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Операционные факторы Kaizen")
+            fig_2 = px.bar(lost_oper, y=0, x=lost_oper.index)
+            fig_2.update_layout(title = "Разбивка операционной дельты", yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Операционные факторы Kaizen")
             st.plotly_chart(fig_2, use_container_width=True, sharing="streamlit")
-            
+
         if len(lost_growth) != 0:
             fig_3 = px.bar(lost_growth, y=0, x=lost_growth.index)
             fig_3.update_layout(title = "Разбивка дельты роста", yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Факторы Роста Kaizen")
@@ -153,6 +170,7 @@ def show_predict_page():
             fig_4 = px.sunburst(lost_total, path=['Направление', 'Аспект'], values='Оценка', maxdepth=2)
             fig_4.update_layout(title = "Разбивка общей дельты")
             st.plotly_chart(fig_4, use_container_width=True, sharing="streamlit")
+'''
 
 # Вызываем приложение
 show_predict_page()

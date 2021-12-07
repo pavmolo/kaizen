@@ -137,7 +137,7 @@ def show_predict_page():
             fig_3 = px.bar(lost_growth, x=0, y=lost_growth.index)
             fig_3.update_layout(title = "Разбивка дельты роста", width=900, xaxis_title="млн. руб. упущенной прибыли", yaxis_title="Факторы Роста Kaizen")
             st.plotly_chart(fig_3, use_container_width=False, sharing="streamlit")
-        if len(lost_growth) != 0 and len(lost_oper) != 0:
+        if len(lost_growth) != 0 & len(lost_oper) != 0:
             lost_oper['o_g'] = pd.Series(np.repeat('Операции', operation_breakdown_elems))
             lost_oper.index = ['Направление', 'Аспект']
             lost_growth['o_g'] = pd.Series(np.repeat('Рост', groth_breakdown_elems))

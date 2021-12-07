@@ -141,7 +141,7 @@ def show_predict_page():
 
         lost_total = lost_oper_fin.append(lost_growth_fin)        
 
-        fig_1 = px.bar(lost_total, y='Оценка', x='Аспект', text='Оценка')
+        fig_1 = px.bar(lost_total, y='Оценка', x='Аспект', text='Оценка', color='Направление')
         fig_1.update_traces(texttemplate='%{text:.2s}', textposition='outside')
         fig_1.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
         st.plotly_chart(fig_1, use_container_width=True, sharing="streamlit")        

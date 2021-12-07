@@ -146,7 +146,7 @@ def show_predict_page():
             lost_growth_fin['o_g'] = np.repeat('Рост', groth_breakdown_elems)
             lost_growth_fin['Ответ'] = lost_growth_fin.index
             lost_growth_fin.columns = ['Оценка', 'Направление', 'Аспект']
-            lost_total = pd.concat([lost_oper_fin, lost_growth_fin], ignore_index=True)
+            lost_total = pd.concat(lost_oper_fin, lost_growth_fin)
             fig_4 = px.sunburst(lost_total, path=['Направление', 'Аспект'], values='Оценка')
             fig_4.update_layout(title = "Разбивка общей дельты", width=900)
             st.plotly_chart(fig_4, use_container_width=False, sharing="streamlit")

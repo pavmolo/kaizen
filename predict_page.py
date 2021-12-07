@@ -135,7 +135,7 @@ def show_predict_page():
             st.plotly_chart(fig_2, use_container_width=False, sharing="streamlit")
             
         if len(lost_growth) != 0:
-            fig_3 = go.Bar(y=lost_growth[0], x=lost_growth.index, marker_color='indianred' #px.bar(lost_growth, y=0, x=lost_growth.index)
+            fig_3 = go.Bar(y=lost_growth[0], x=lost_growth.index, marker_color='indianred') #px.bar(lost_growth, y=0, x=lost_growth.index)
             fig_3.update_layout(title = "Разбивка дельты роста", width=900, yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Факторы Роста Kaizen")
             st.plotly_chart(fig_3, use_container_width=False, sharing="streamlit")
         if len(lost_oper.append(lost_growth)) != 0:

@@ -151,7 +151,7 @@ def show_predict_page():
             
             lost_total = lost_oper_fin.append(lost_growth_fin)
             fig_4 = px.sunburst(lost_total, path=['Направление', 'Аспект'], values='Оценка', maxdepth=2)
-            fig_4.update_layout(title = "Разбивка общей дельты", width=900)
+            fig_4.update_layout(title = "Разбивка общей дельты", width=900, height=900)
             st.plotly_chart(fig_4, use_container_width=False, sharing="streamlit")
 
 # Вызываем приложение

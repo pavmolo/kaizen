@@ -99,7 +99,7 @@ def show_predict_page():
                                      text=lost, y=[lost[0], -lost[1], -lost[2]],
                                      textposition="auto",
                                      connector={"line": {"color": "rgb(63, 63, 63)"}}))
-        #fig.update_layout(title = "Потери прибыли, млн. руб. в год")
+        fig.update_layout(title = "Потери прибыли, млн. руб. в год")
         st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
         
     
@@ -131,7 +131,7 @@ def show_predict_page():
 
         if len(lost_oper) != 0:
             fig_2 = go.Figure(data=[go.Bar(x=lost_oper.index, y=lost_oper['0'], text=y, textposition='auto',)]) # px.bar(lost_oper, y=0, x=lost_oper.index)
-            fig_2.update_layout(title = "Разбивка операционной дельты", yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Операционные факторы Kaizen")
+            #fig_2.update_layout(title = "Разбивка операционной дельты", yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Операционные факторы Kaizen")
             st.plotly_chart(fig_2, use_container_width=True, sharing="streamlit")
             
         if len(lost_growth) != 0:

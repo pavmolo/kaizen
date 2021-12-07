@@ -137,7 +137,7 @@ def show_predict_page():
             fig_3 = px.bar(lost_growth, x=0, y=lost_growth.index)
             fig_3.update_layout(title = "Разбивка дельты роста", width=900, xaxis_title="млн. руб. упущенной прибыли", yaxis_title="Факторы Роста Kaizen")
             st.plotly_chart(fig_3, use_container_width=False, sharing="streamlit")
-        if len(pd.concat([lost_growth, lost_oper]) != 0:
+        if len(lost_oper) != 0:
             lost_oper_fin = pd.DataFrame(lost_oper)
             lost_oper_fin['o_g'] = np.repeat('Операции', operation_breakdown_elems)
             lost_oper_fin['Ответ'] = lost_oper_fin.index
@@ -148,7 +148,7 @@ def show_predict_page():
             lost_growth_fin.columns = ['Оценка', 'Направление', 'Аспект']
             lost_total = pd.concat([lost_oper_fin, lost_growth_fin])
             fig_4 = px.sunburst(lost_total, path=['Направление', 'Аспект'], values='Оценка')
-            fig_4.update_layout(title = "Разбивка дельты роста", width=900)
+            fig_4.update_layout(title = "Разбивка общей дельты", width=900)
             st.plotly_chart(fig_4, use_container_width=False, sharing="streamlit")
 
 # Вызываем приложение

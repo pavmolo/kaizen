@@ -135,8 +135,8 @@ def show_predict_page():
             st.plotly_chart(fig_2, use_container_width=False, sharing="streamlit")
             
         if len(lost_growth) != 0:
-            fig_3 = px.bar(lost_growth, y=0, x=lost_growth.index)
-            fig_3.update_layout(title = "Разбивка дельты роста", width=900, yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Факторы Роста Kaizen", marker_color='red')
+            fig_3 = px.bar(lost_growth, y=0, x=lost_growth.index, marker_color='lightsalmon')
+            fig_3.update_layout(title = "Разбивка дельты роста", width=900, yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Факторы Роста Kaizen")
             st.plotly_chart(fig_3, use_container_width=False, sharing="streamlit")
         if len(lost_oper.append(lost_growth)) != 0:
             lost_oper_fin = pd.DataFrame(lost_oper)

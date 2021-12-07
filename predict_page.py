@@ -143,7 +143,7 @@ def show_predict_page():
 
         fig_1 = px.bar(lost_total, y='Оценка', x='Аспект', text='Оценка', color='Направление')
         fig_1.update_traces(texttemplate='%{text:.2s}', textposition='auto')
-        fig_1.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
+        fig_1.update_layout(uniformtext_minsize=8, uniformtext_mode='hide', title = "Разбивка упущенной прибыли", yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Факторы Kaizen")
         st.plotly_chart(fig_1, use_container_width=True, sharing="streamlit")        
 
 #        if len(lost_oper) != 0:

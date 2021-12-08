@@ -145,7 +145,7 @@ def show_predict_page():
             fig_1.update_traces(texttemplate='%{text:.2s}', textposition='auto')
             fig_1.update_layout(uniformtext_minsize=8, uniformtext_mode='hide', title = "Разбивка упущенной прибыли", yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Факторы Kaizen", showlegend=False)
             st.plotly_chart(fig_1, use_container_width=True, sharing="streamlit")
-            st.dataframe(lost_total.drop('Аспект'))
+            st.dataframe(lost_total.drop('Аспект', axis='columns'))
 
 #        if len(lost_oper) != 0:
 #            fig_2 = px.bar(lost_oper, y=0, x=lost_oper.index)

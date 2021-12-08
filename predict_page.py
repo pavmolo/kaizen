@@ -139,7 +139,7 @@ def show_predict_page():
         lost_growth_fin['Ответ'] = lost_growth_fin.index
         lost_growth_fin.columns = ['Оценка', 'Направление', 'Аспект']
 
-        lost_total = lost_oper_fin.append(lost_growth_fin)        
+        lost_total = lost_oper_fin.append(lost_growth_fin).sort_values("Оценка", ascending=False)        
         if len(lost_oper) != 0:
             fig_1 = px.bar(lost_total, y='Оценка', x='Аспект', text='Оценка', color='Направление')
             fig_1.update_traces(texttemplate='%{text:.2s}', textposition='auto')

@@ -74,19 +74,17 @@ def show_predict_page():
     #st.image(image, caption='Kaizen Institute')
     st.markdown('''<a href="http://ru.kaizen.com/"><img src='https://www.kaizen.com/images/kaizen_logo.png' style="width: 50%; margin-left: 25%; margin-right: 25%; text-align: center;"></a><p>''', unsafe_allow_html=True)
     st.title("Определи свой потенциал")
-    st.title("Выберите валюту:")
     val_list = ['Рубль', 'Доллар США']
     val_0 = st.radio("Выберите валюту:", val_list, index=0)
     if val_0 == 'Рубль':
         val = 'млн. руб.'
     else:
         val = 'млн. долларов'
-    st.subheader(val)
     st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
 
     industry = st.radio("Ваша отрасль:", industry_list)
     market_state = st.radio("Охарактеризуйте состояние сектора, в котором вы работаете:", gro_state_list)
-    revenue = st.number_input("Какова ваша выручка, млн, руб. в год:", value=0)
+    revenue = st.number_input(f"Какова ваша выручка, {val} в год:", value=0)
     margin = st.slider("Какова ваша маржа операционной прибыли, % к выручке:", -20, 80, 0, 2)
     growth = st.slider("Каков ваш среднегодовой рост выручки в % за последние 3 года", -20, 100, 0, 5)
     lost = lost_profit(industry, market_state, revenue, margin, growth)
@@ -97,10 +95,10 @@ def show_predict_page():
     proc_lost_1 = - (lost[1] / revenue * 100)
     proc_lost_2 = - (lost[2] / revenue * 100)
     
-    col1.metric("ОБЩАЯ упущенная прибыль", f'{lost[0]:.0f} млн. руб.', f'{proc_lost_rev:.0f}% выручки')
-    col2.metric("Потери прибыли в ОПЕРАЦИЯХ", f'{lost[1]:.0f} млн. руб.', f'{proc_lost_1:.0f}% выручки')
-    col3.metric("Потери прибыли в РОСТЕ", f'{lost[2]:.0f} млн. руб.', f'{proc_lost_2:.0f}% выручки')
-    # st.markdown(f'Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: <b>{lost[0]:.0f}</b> млн. руб. <p> в том числе: <p>Операционная Дельта (прибыль упущенная в операционной деятельности): <b>{lost[1]:.0f}</b> млн. руб.<p> Дельта Роста (прибыль упущенная из-за отсутствия роста): <b>{lost[2]:.0f}</b> млн. руб.', unsafe_allow_html=True)
+    col1.metric("ОБЩАЯ упущенная прибыль", f'{lost[0]:.0f} {val}', f'{proc_lost_rev:.0f}% выручки')
+    col2.metric("Потери прибыли в ОПЕРАЦИЯХ", f'{lost[1]:.0f} {val}', f'{proc_lost_1:.0f}% выручки')
+    col3.metric("Потери прибыли в РОСТЕ", f'{lost[2]:.0f} {val}', f'{proc_lost_2:.0f}% выручки')
+    # st.markdown(f'Предварительная оценка разницы в прибыли при сравнении с компаниями, реализующими Kaizen: <b>{lost[0]:.0f}</b> {val} <p> в том числе: <p>Операционная Дельта (прибыль упущенная в операционной деятельности): <b>{lost[1]:.0f}</b> {val} <p> Дельта Роста (прибыль упущенная из-за отсутствия роста): <b>{lost[2]:.0f}</b> {val}', unsafe_allow_html=True)
     
     if revenue != 0:
         fig = go.Figure(go.Waterfall(name="20", orientation="v", measure=["absolute", "relative", "relative"],
@@ -108,7 +106,7 @@ def show_predict_page():
                                      text=lost, y=[lost[0], -lost[1], -lost[2]],
                                      textposition="auto",
                                      connector={"line": {"color": "rgb(63, 63, 63)"}}))
-        fig.update_layout(title = "Потери прибыли, млн. руб. в год")
+        fig.update_layout(title = f"Потери прибыли, {val} в год")
         st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
         st.title("Оцените следующие аспекты вашей компании")
         st.subheader("Операционные аспекты:")
@@ -151,19 +149,19 @@ def show_predict_page():
         if len(lost_oper) != 0:
             fig_1 = px.bar(lost_total, y='Оценка', x='Аспект', text='Оценка', color='Направление')
             fig_1.update_traces(texttemplate='%{text:.2s}', textposition='auto')
-            fig_1.update_layout(uniformtext_minsize=8, uniformtext_mode='hide', title = "Разбивка упущенной прибыли", yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Факторы Kaizen", showlegend=False)
+            fig_1.update_layout(uniformtext_minsize=8, uniformtext_mode='hide', title = "Разбивка упущенной прибыли", yaxis_title=f"{val} упущенной прибыли", xaxis_title="Факторы Kaizen", showlegend=False)
             fig_1.update_xaxes(categoryorder='total descending')
             st.plotly_chart(fig_1, use_container_width=True, sharing="streamlit")
             st.dataframe(lost_total.drop('Аспект', axis='columns').sort_values("Оценка", ascending=False))
 
 #        if len(lost_oper) != 0:
 #            fig_2 = px.bar(lost_oper, y=0, x=lost_oper.index)
-#            fig_2.update_layout(title = "Разбивка операционной дельты", yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Операционные факторы Kaizen")
+#            fig_2.update_layout(title = "Разбивка операционной дельты", yaxis_title=f"{val} упущенной прибыли", xaxis_title="Операционные факторы Kaizen")
 #            st.plotly_chart(fig_2, use_container_width=True, sharing="streamlit")
 #
 #        if len(lost_growth) != 0:
 #            fig_3 = px.bar(lost_growth, y=0, x=lost_growth.index)
-#            fig_3.update_layout(title = "Разбивка дельты роста", yaxis_title="млн. руб. упущенной прибыли", xaxis_title="Факторы Роста Kaizen")
+#            fig_3.update_layout(title = "Разбивка дельты роста", yaxis_title=f"{val} упущенной прибыли", xaxis_title="Факторы Роста Kaizen")
 #            st.plotly_chart(fig_3, use_container_width=True, sharing="streamlit")
 #        if len(lost_oper.append(lost_growth)) != 0:
 #            lost_oper_fin = pd.DataFrame(lost_oper)

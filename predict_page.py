@@ -74,6 +74,14 @@ def show_predict_page():
     #st.image(image, caption='Kaizen Institute')
     st.markdown('''<a href="http://ru.kaizen.com/"><img src='https://www.kaizen.com/images/kaizen_logo.png' style="width: 50%; margin-left: 25%; margin-right: 25%; text-align: center;"></a><p>''', unsafe_allow_html=True)
     st.title("Определи свой потенциал")
+    st.title("Выберите валюту:")
+    val_list = ['Рубль', 'Доллар США']
+    val_0 = st.radio(val_list, val_list, index=0)
+    if val_0 == val_list[0]:
+        val = 'млн. руб.'
+        else:
+            val = 'млн. долларов'
+    st.subheader(val)
     st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
 
     industry = st.radio("Ваша отрасль:", industry_list)
@@ -88,6 +96,7 @@ def show_predict_page():
     proc_lost_rev = - (lost[0] / revenue * 100)
     proc_lost_1 = - (lost[1] / revenue * 100)
     proc_lost_2 = - (lost[2] / revenue * 100)
+    
     col1.metric("ОБЩАЯ упущенная прибыль", f'{lost[0]:.0f} млн. руб.', f'{proc_lost_rev:.0f}% выручки')
     col2.metric("Потери прибыли в ОПЕРАЦИЯХ", f'{lost[1]:.0f} млн. руб.', f'{proc_lost_1:.0f}% выручки')
     col3.metric("Потери прибыли в РОСТЕ", f'{lost[2]:.0f} млн. руб.', f'{proc_lost_2:.0f}% выручки')
@@ -101,8 +110,6 @@ def show_predict_page():
                                      connector={"line": {"color": "rgb(63, 63, 63)"}}))
         fig.update_layout(title = "Потери прибыли, млн. руб. в год")
         st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
-        
-    
         st.title("Оцените следующие аспекты вашей компании")
         st.subheader("Операционные аспекты:")
         anw_0 = st.radio(df_deltas_breakdown.index[0], answers_list, index=0)

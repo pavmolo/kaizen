@@ -75,9 +75,9 @@ def show_predict_page():
     st.markdown('''<a href="http://ru.kaizen.com/"><img src='https://www.kaizen.com/images/kaizen_logo.png' style="width: 50%; margin-left: 25%; margin-right: 25%; text-align: center;"></a><p>''', unsafe_allow_html=True)
     st.title("Определи свой потенциал")
     st.title("Выберите валюту:")
-    val_list = [['Рубль', 'Доллар США']]
+    val_list = ['Рубль', 'Доллар США']
     val_0 = st.radio(val_list, val_list, index=0)
-    if val_0 == val_list[0]:
+    if val_0 == 'Рубль':
         val = 'млн. руб.'
     else:
         val = 'млн. долларов'

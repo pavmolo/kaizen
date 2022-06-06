@@ -77,9 +77,9 @@ def show_predict_page():
     val_list = ['Рубль', 'Доллар США']
     val_0 = st.radio("Выберите валюту:", val_list, index=0)
     if val_0 == 'Рубль':
-        val = 'млн. руб.'
+        val = 'млн₽'
     else:
-        val = 'млн. дол.'
+        val = 'млн$'
     st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
 
     industry = st.radio("Ваша отрасль:", industry_list)

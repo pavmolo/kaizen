@@ -76,7 +76,7 @@ def show_predict_page():
     st.title("Определи свой потенциал")
     st.title("Выберите валюту:")
     val_list = ['Рубль', 'Доллар США']
-    val_0 = st.radio(val_list, val_list, index=0)
+    val_0 = st.radio("Выберите валюту:", val_list, index=0)
     if val_0 == 'Рубль':
         val = 'млн. руб.'
     else:

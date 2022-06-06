@@ -79,8 +79,8 @@ def show_predict_page():
     val_0 = st.radio(val_list, val_list, index=0)
     if val_0 == val_list[0]:
         val = 'млн. руб.'
-        else:
-            val = 'млн. долларов'
+    else:
+        val = 'млн. долларов'
     st.subheader(val)
     st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
 

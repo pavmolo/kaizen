@@ -79,7 +79,7 @@ def show_predict_page():
     if val_0 == 'Рубль':
         val = 'млн₽'
     else:
-        val = 'млн$'
+        val = 'тыс$'
     st.subheader('Нам необходима информация, чтобы спрогнозировать ваши показатели прибыли')
 
     industry = st.radio("Ваша отрасль:", industry_list)

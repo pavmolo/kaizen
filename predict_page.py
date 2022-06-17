@@ -42,10 +42,7 @@ df_answer_score['answer_score'] = pd.to_numeric(df_answer_score['answer_score'])
 #df_answer_score['answer_id'] = pd.to_numeric(df_answer_score['answer_id'])
 
 
-df_sector_margin = pd.read_csv(df_sector_margin_csv)
-df_growth_rate = pd.read_csv(df_growth_rate_csv)
-df_deltas_breakdown = pd.read_csv(deltas_breakdown_csv)
-df_answer_score = pd.read_csv(answer_score_csv)
+
 
 
 df_growth_rate.set_index('growth_state', inplace=True)

@@ -4,6 +4,8 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 #from PIL import Image
+url_to_logo = "https://i.ibb.co/cFYfFHq/5-4x.png"
+
 gsheetid = '1S7gJojFKedjSvSRM9npIDAzN_6mkSZhgEdGpNbxXnK0'
 list_1 = 'sector_margin'
 list_2 = 'growth_rate'
@@ -60,7 +62,7 @@ def break_down_g(a_12, a_13, a_14, a_15, a_16, a_17):
 def show_predict_page():
     #image = Image.open('https://www.kaizen.com/images/kaizen_logo.png')
     #st.image(image, caption='Kaizen Institute')
-    st.markdown('''<a href="http://kaizen-consult.ru/"><img src='https://www.kaizen.com/images/kaizen_logo.png' style="width: 50%; margin-left: 25%; margin-right: 25%; text-align: center;"></a><p>''', unsafe_allow_html=True)
+    st.markdown('''<img src='https://i.ibb.co/cFYfFHq/5-4x.png' style="width: 50%; margin-left: 25%; margin-right: 25%; text-align: center;"><p>''', unsafe_allow_html=True)
     st.title("Определи свой потенциал")
     val_list = ['Рубль', 'Доллар США']
     val_0 = st.radio("Выберите валюту:", val_list, index=0)

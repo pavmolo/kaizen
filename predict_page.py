@@ -6,19 +6,43 @@ import plotly.express as px
 #from PIL import Image
 url_to_logo = "https://i.ibb.co/cFYfFHq/5-4x.png"
 
-gsheetid = '1S7gJojFKedjSvSRM9npIDAzN_6mkSZhgEdGpNbxXnK0'
-list_1 = 'sector_margin'
-list_2 = 'growth_rate'
-list_3 = 'deltas_breakdown'
-list_4 = 'answer_score'
-df_sector_margin_csv = "https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}".format(gsheetid, list_1)
-df_growth_rate_csv = "https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}".format(gsheetid, list_2)
-deltas_breakdown_csv = "https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}".format(gsheetid, list_3)
-answer_score_csv = "https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}".format(gsheetid, list_4)
-df_sector_margin = pd.read_csv(df_sector_margin_csv)
-df_growth_rate = pd.read_csv(df_growth_rate_csv)
-df_deltas_breakdown = pd.read_csv(deltas_breakdown_csv)
-df_answer_score = pd.read_csv(answer_score_csv)
+# Создаем DataFrame df_sector_margin
+data_sector_margin = {
+    'sector': ['Логистика', 'Ритейл', 'Производство', 'Энергетика', 'Финансы', 'Здравоохранение', 'IT', 'Недвижимость', 'Коммуникационные услуги', 'Коммунальные услуги'],
+    'margin': [0.282470, 0.223180, 0.231469, 0.386998, 0.410855, 0.293859, 0.323139, 0.760709, 0.374194, 0.441514]
+}
+df_sector_margin = pd.DataFrame(data_sector_margin)
+
+# Создаем DataFrame df_growth_rate
+data_growth_rate = {
+    'growth_state': ['Много небольших участников на конкурентом рынке', 
+                     'В моем секторе есть крупные игроки, в число которых я не вхожу', 
+                     'В моем секторе есть крупные игроки, в том числе я', 
+                     'Я монополист'],
+    'growth_rate': [0.6, 0.45, 0.25, 0.05]
+}
+df_growth_rate = pd.DataFrame(data_growth_rate)
+
+# Создаем DataFrame df_deltas_breakdown
+data_deltas_breakdown = {
+    'answer': ['Рекламации', 'Исправимая дефектность', 'Неисправимая дефектность', 'Процент отходов', 
+               'Эффективности ключевого оборудования', 'Оборачиваемость запасов', 'Процент не выполненных в срок заказов',
+               'Время от заказа до поставки', 'Производительность труда', 'Текучесть кадров', 
+               'Удовлетворенность клиентов сервисом', 'Конверсия', 'Срок разработки новой продукции', 
+               'Уровень присутствия', 'Глубина переработки', 'Доля выручки от постоянных заказов', 
+               'Доля выручки от новинок (менее года)'],
+    'question_score': [9.7, 6, 7, 3, 4, 8, 9.4, 5, 5, 10, 7, 4, 4, 9.6, 9.2, 8.6, 4]
+}
+df_deltas_breakdown = pd.DataFrame(data_deltas_breakdown)
+
+# Создаем DataFrame df_answer_score
+data_answer_score = {
+    'answer_id': [0, 1, 2, 3, 4],
+    'answer': ['Не актуален', 'Сильно хуже конкурентов', 'Средний уровень по отрасли', 'Лучше среднего уровеня по отрасли', 'Лучшие на рынке'],
+    'answer_score': [0.00, 2.00, 1.00, 0.50, 0.25]
+}
+df_answer_score = pd.DataFrame(data_answer_score)
+
 df_growth_rate.set_index('growth_state', inplace=True)
 df_sector_margin.set_index('sector', inplace=True)
 df_deltas_breakdown.set_index('answer', inplace=True)
